@@ -35,7 +35,7 @@ func HangmanADV() *HangManData { //return the struct
 		hangadv.WordToFind, hangadv.GivenLetter = showWordp(hangadv.Word, shownLetter)
 		hangadv.NbrOfAttempt = 10
 	}
-	return hangadv
+	return &hangadv
 }
 
 func Playingadv(hangadv *HangManData, letter []rune) {
