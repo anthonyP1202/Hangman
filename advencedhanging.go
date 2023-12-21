@@ -7,14 +7,15 @@ import (
 )
 
 type HangManData struct {
-	Word         []rune
-	WordToFind   []string
-	GivenLetter  []rune
-	GivenWord    []string
-	NbrOfAttempt int
+	Word             []rune
+	WordToFind       []string
+	GivenLetter      []rune
+	GivenWord        []string
+	NbrOfAttempt     int
+	VictoryCondition int
 }
 
-func HangmanADV() {
+func HangmanADV() HangManData { //return the struct
 	var hangadv HangManData
 	listOfWord := []string{}
 	wordListFile, err := os.Open("wordslist.txt")
@@ -27,18 +28,19 @@ func HangmanADV() {
 		fileScanner.Split(bufio.ScanLines)
 
 		for fileScanner.Scan() {
-			listOfWord = append(listOfWord, fileScanner.Text()) 
+			listOfWord = append(listOfWord, fileScanner.Text())
 		}
 		hangadv.Word = rndWord(&hangadv, listOfWord)
 		shownLetter := len(hangadv.Word)/2 - 1
 		hangadv.WordToFind, hangadv.GivenLetter = showWordp(hangadv.Word, shownLetter)
 		hangadv.NbrOfAttempt = 10
 	}
+	return hangadv
 }
 
-func Playingadv(hangadv *HangManData ,letter []rune) { 
-	won := 0
-	for hangadv.NbrOfAttempt > 0 && won == 0 {
+func Playingadv(hangadv *HangManData, letter []rune) {
+	hangadv.VictoryCondition = 0
+	for hangadv.NbrOfAttempt > 0 && hangadv.VictoryCondition == 0 {
 		for loop := 0; loop < len(hangadv.WordToFind); loop++ {
 			fmt.Print(hangadv.WordToFind[loop])
 		}
@@ -48,14 +50,14 @@ func Playingadv(hangadv *HangManData ,letter []rune) {
 			alreadyGot := 0
 			if 1 < len(letter) && len(letter) == len(hangadv.Word) {
 				for b := 0; b < len(hangadv.GivenWord); b++ {
-					if string(letter) == hangadv.GivenWord[b] { 
+					if string(letter) == hangadv.GivenWord[b] {
 						alreadyGot = 1
 					}
 				}
-				if alreadyGot == 1 { 
+				if alreadyGot == 1 {
 					fmt.Println("already attempted word")
 					fmt.Println(hangadv.GivenWord)
-				} else { 
+				} else {
 					hangadv.GivenWord = append(hangadv.GivenWord, string(letter))
 					for i := 0; i < len(hangadv.Word); i++ {
 						if letter[i] != hangadv.Word[i] {
@@ -63,9 +65,9 @@ func Playingadv(hangadv *HangManData ,letter []rune) {
 						}
 					}
 					if condition == 1 {
-						hangadv.NbrOfAttempt = hangadv.NbrOfAttempt - 2 
+						hangadv.NbrOfAttempt = hangadv.NbrOfAttempt - 2
 					} else {
-						won = 1
+						hangadv.VictoryCondition = 1
 					}
 				}
 			} else {
@@ -94,23 +96,23 @@ func Playingadv(hangadv *HangManData ,letter []rune) {
 				fmt.Println("letter already tested")
 			}
 		}
-		if won == 0 {
+		if hangadv.VictoryCondition == 0 {
 			// fmt.Println("number of attempt left : ", nbrOfAttempt)
-			won = 1 // check if there still is a _ however if a word contain a _ it get block it isn't an issue yet
+			hangadv.VictoryCondition = 1 // check if there still is a _ however if a word contain a _ it get block it isn't an issue yet
 			for f := 0; f < len(hangadv.WordToFind); f++ {
 				if hangadv.WordToFind[f] == "_" {
-					won = 0
+					hangadv.VictoryCondition = 0
 				}
 			}
 		}
 	}
-	if hangadv.NbrOfAttempt == 0 && won == 0 {
-		fmt.Println("you lost the word was", string(hangadv.Word))
-	} else {
-		fmt.Print("you won the word was ")
-		for v := 0; v < len(hangadv.Word); v++ {
-			fmt.Print(string(hangadv.Word[v]))
-		}
-		fmt.Print("\n")
-	}
+	// if hangadv.NbrOfAttempt == 0 && hangadv.VictoryCondition == 0 {
+	// 	fmt.Println("you lost the word was", string(hangadv.Word))
+	// } else {
+	// 	fmt.Print("you hangadv.VictoryCondition the word was ")
+	// 	for v := 0; v < len(hangadv.Word); v++ {
+	// 		fmt.Print(string(hangadv.Word[v]))
+	// 	}
+	// 	fmt.Print("\n")
+	// }
 }

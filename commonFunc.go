@@ -1,7 +1,6 @@
 package Hangman
 
 import (
-	"fmt"
 	"math/rand"
 )
 
@@ -39,17 +38,4 @@ func showWordp(word []rune, nbrOfLetterToShow int) ([]string, []rune) { // give 
 		}
 	}
 	return wordToFind, givenLetter
-}
-
-func PromptUserLetteradv() []rune {
-	var letter string
-	for letter == "" {
-		// fmt.Println("enter a letter/word : ")
-		fmt.Scanln(&letter)
-	}
-	promptLetter := []rune(letter)
-	if promptLetter[0] < 'Z' && promptLetter[0] > 'A' {
-		promptLetter[0] = promptLetter[0] + 32
-	}
-	return promptLetter
 }
