@@ -1,4 +1,4 @@
-package github.com/anthonyP1202/Hangman
+package Hangman
 
 import (
 	"bufio"
