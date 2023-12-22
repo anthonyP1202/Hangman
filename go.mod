@@ -1,3 +1,3 @@
-module github.com/anthonyP1202/Hangman
+module Hangman
 
 go 1.21.0
