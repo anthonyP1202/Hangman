@@ -1,4 +1,4 @@
-package github.com/anthonyP1202/Hangman
+package Hangman
 
 import (
 	"bufio"
@@ -30,9 +30,9 @@ func HangmanADV() *HangManData { //return the struct
 		for fileScanner.Scan() {
 			listOfWord = append(listOfWord, fileScanner.Text())
 		}
-		hangadv.Word = rndWord(&hangadv, listOfWord)
+		hangadv.Word = RndWord(&hangadv, listOfWord)
 		shownLetter := len(hangadv.Word)/2 - 1
-		hangadv.WordToFind, hangadv.GivenLetter = showWordp(hangadv.Word, shownLetter)
+		hangadv.WordToFind, hangadv.GivenLetter = ShowWordp(hangadv.Word, shownLetter)
 		hangadv.NbrOfAttempt = 10
 	}
 	return &hangadv

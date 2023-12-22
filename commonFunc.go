@@ -1,15 +1,15 @@
-package github.com/anthonyP1202/Hangman
+package Hangman
 
 import (
 	"math/rand"
 )
 
-func rndWord(hangpaused *HangManData, wordList []string) []rune { // pick a random word
+func RndWord(hangpaused *HangManData, wordList []string) []rune { // pick a random word
 	word := []rune(wordList[rune(rand.Intn(len(wordList)))])
 	return word
 }
 
-func showWordp(word []rune, nbrOfLetterToShow int) ([]string, []rune) { // give the letter that are given with the word
+func ShowWordp(word []rune, nbrOfLetterToShow int) ([]string, []rune) { // give the letter that are given with the word
 	wordToFind := make([]string, len(word))
 	for fillList := 0; fillList < len(word); fillList++ { // put _ for every letter
 		wordToFind[fillList] = "_"
