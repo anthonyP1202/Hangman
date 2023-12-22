@@ -1,4 +1,4 @@
-package Hangman
+package github.com/anthonyP1202/Hangman
 
 import (
 	"math/rand"
