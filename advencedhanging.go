@@ -39,7 +39,7 @@ func HangmanADV() *HangManData { //return the struct
 	return &hangadv
 }
 
-func Playingadv(hangadv *HangManData, letter []rune) HangManData {
+func Playingadv(hangadv *HangManData, letter []rune) *HangManData {
 	hangadv.VictoryCondition = 0
 	for hangadv.NbrOfAttempt > 0 && hangadv.VictoryCondition == 0 {
 		for loop := 0; loop < len(hangadv.WordToFind); loop++ {
@@ -107,7 +107,7 @@ func Playingadv(hangadv *HangManData, letter []rune) HangManData {
 			}
 		}
 	}
-	return *hangadv
+	return hangadv
 	// if hangadv.NbrOfAttempt == 0 && hangadv.VictoryCondition == 0 {
 	// 	fmt.Println("you lost the word was", string(hangadv.Word))
 	// } else {
