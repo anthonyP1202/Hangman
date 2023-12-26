@@ -34,11 +34,12 @@ func HangmanADV() *HangManData { //return the struct
 		shownLetter := len(hangadv.Word)/2 - 1
 		hangadv.WordToFind, hangadv.GivenLetter = ShowWordp(hangadv.Word, shownLetter)
 		hangadv.NbrOfAttempt = 10
+		hangadv.VictoryCondition = 0
 	}
 	return &hangadv
 }
 
-func Playingadv(hangadv *HangManData, letter []rune) {
+func Playingadv(hangadv *HangManData, letter []rune) HangManData {
 	hangadv.VictoryCondition = 0
 	for hangadv.NbrOfAttempt > 0 && hangadv.VictoryCondition == 0 {
 		for loop := 0; loop < len(hangadv.WordToFind); loop++ {
@@ -106,6 +107,7 @@ func Playingadv(hangadv *HangManData, letter []rune) {
 			}
 		}
 	}
+	return *hangadv
 	// if hangadv.NbrOfAttempt == 0 && hangadv.VictoryCondition == 0 {
 	// 	fmt.Println("you lost the word was", string(hangadv.Word))
 	// } else {
