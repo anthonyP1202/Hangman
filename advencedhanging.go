@@ -15,10 +15,10 @@ type HangManData struct {
 	VictoryCondition int
 }
 
-func HangmanADV() *HangManData { //return the struct
+func HangmanADV(wordslist string) *HangManData { //return the struct
 	var hangadv HangManData
 	listOfWord := []string{}
-	wordListFile, err := os.Open("wordslist.txt")
+	wordListFile, err := os.Open(wordslist)
 	if err != nil {
 		// fmt.Println("error with the file")
 		os.Exit(1)
@@ -58,6 +58,7 @@ func Playingadv(hangadv *HangManData, letter []rune) *HangManData {
 				if alreadyGot == 1 {
 					fmt.Println("already attempted word")
 					fmt.Println(hangadv.GivenWord)
+					os.Exit(1)
 				} else {
 					hangadv.GivenWord = append(hangadv.GivenWord, string(letter))
 					for i := 0; i < len(hangadv.Word); i++ {
@@ -73,6 +74,7 @@ func Playingadv(hangadv *HangManData, letter []rune) *HangManData {
 				}
 			} else {
 				fmt.Println("attempted word cannot be seeked word (different lenght)")
+				os.Exit(1)
 			}
 		} else {
 			condition := 0
@@ -81,8 +83,8 @@ func Playingadv(hangadv *HangManData, letter []rune) *HangManData {
 					condition = 1
 				}
 			}
-			hangadv.GivenLetter = append(hangadv.GivenLetter, letter[0])
 			if condition == 0 {
+				hangadv.GivenLetter = append(hangadv.GivenLetter, letter[0])
 				wrong := 1
 				for i := 0; i < len(hangadv.Word); i++ {
 					if letter[0] == hangadv.Word[i] {
@@ -95,6 +97,7 @@ func Playingadv(hangadv *HangManData, letter []rune) *HangManData {
 				}
 			} else {
 				fmt.Println("letter already tested")
+				os.Exit(1)
 			}
 		}
 		if hangadv.VictoryCondition == 0 {
