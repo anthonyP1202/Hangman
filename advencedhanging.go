@@ -20,7 +20,7 @@ func HangmanADV(wordslist string) *HangManData { //return the struct
 	listOfWord := []string{}
 	wordListFile, err := os.Open(wordslist)
 	if err != nil {
-		// fmt.Println("error with the file")
+		fmt.Println("error with the file")
 		os.Exit(1)
 	} else {
 		fileScanner := bufio.NewScanner(wordListFile)
