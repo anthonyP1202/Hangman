@@ -15,7 +15,7 @@ type HangManData struct {
 	VictoryCondition int
 }
 
-func HangmanADV(wordslist string, hangadv HangManData) *HangManData { //return the struct
+func HangmanADV(hangadv *HangManData, wordslist string) *HangManData {
 	listOfWord := []string{}
 	wordListFile, err := os.Open(wordslist)
 	if err != nil {
@@ -29,13 +29,13 @@ func HangmanADV(wordslist string, hangadv HangManData) *HangManData { //return t
 		for fileScanner.Scan() {
 			listOfWord = append(listOfWord, fileScanner.Text())
 		}
-		hangadv.Word = RndWord(&hangadv, listOfWord)
+		hangadv.Word = RndWord(hangadv, listOfWord)
 		shownLetter := len(hangadv.Word)/2 - 1
 		hangadv.WordToFind, hangadv.GivenLetter = ShowWordp(hangadv.Word, shownLetter)
 		hangadv.NbrOfAttempt = 10
 		hangadv.VictoryCondition = 0
 	}
-	return &hangadv
+	return hangadv
 }
 
 func Playingadv(hangadv *HangManData, letter []rune) *HangManData {
