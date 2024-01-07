@@ -15,8 +15,7 @@ type HangManData struct {
 	VictoryCondition int
 }
 
-func HangmanADV(wordslist string) *HangManData { //return the struct
-	var hangadv HangManData
+func HangmanADV(wordslist string, hangadv HangManData) *HangManData { //return the struct
 	listOfWord := []string{}
 	wordListFile, err := os.Open(wordslist)
 	if err != nil {
