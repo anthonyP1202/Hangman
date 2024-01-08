@@ -9,7 +9,7 @@ import (
 type HangManData struct {
 	Word             []rune
 	WordToFind       []string
-	GivenLetter      []rune
+	GivenLetter      []string
 	GivenWord        []string
 	NbrOfAttempt     int
 	VictoryCondition int
@@ -75,12 +75,12 @@ func Playingadv(hangadv *HangManData, letter []rune) *HangManData {
 	} else {
 		condition := 0
 		for o := 0; o < len(hangadv.GivenLetter); o++ {
-			if letter[0] == hangadv.GivenLetter[o] {
+			if letter[0] == rune(hangadv.GivenLetter[o][0]) {
 				condition = 1
 			}
 		}
 		if condition == 0 {
-			hangadv.GivenLetter = append(hangadv.GivenLetter, letter[0])
+			hangadv.GivenLetter = append(hangadv.GivenLetter, string(letter[0]))
 			wrong := 1
 			for i := 0; i < len(hangadv.Word); i++ {
 				if letter[0] == hangadv.Word[i] {
