@@ -8,6 +8,7 @@ import (
 
 type HangManData struct {
 	Word             []rune
+	StringWord       string
 	WordToFind       []string
 	GivenLetter      []string
 	GivenWord        []string
@@ -30,6 +31,7 @@ func HangmanADV(hangadv *HangManData, wordslist string) *HangManData {
 			listOfWord = append(listOfWord, fileScanner.Text())
 		}
 		hangadv.Word = RndWord(hangadv, listOfWord)
+		hangadv.StringWord = string(hangadv.Word)
 		shownLetter := len(hangadv.Word)/2 - 1
 		hangadv.WordToFind, hangadv.GivenLetter = ShowWordp(hangadv.Word, shownLetter)
 		hangadv.NbrOfAttempt = 10
