@@ -36,6 +36,7 @@ func HangmanADV(hangadv *HangManData, wordslist string) *HangManData {
 		hangadv.WordToFind, hangadv.GivenLetter = ShowWordp(hangadv.Word, shownLetter)
 		hangadv.NbrOfAttempt = 10
 		hangadv.VictoryCondition = 0
+		hangadv.GivenWord = nil
 	}
 	return hangadv
 }
